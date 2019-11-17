@@ -16,7 +16,7 @@ pre-commit run --all-files
 Sample `.pre-commit-config.yaml`:
 ```yaml
 -   repo: https://gitlab.com/devopshq/gitlab-ci-linter
-    rev: 1.0.0
+    rev: v1.0.0
     hooks:
     -   id: gitlab-ci-linter
 ```
@@ -24,7 +24,7 @@ Sample `.pre-commit-config.yaml`:
 To specify your own Gitlab server:
 ```yaml
 -   repo: https://gitlab.com/devopshq/gitlab-ci-linter
-    rev: 1.0.0
+    rev: v1.0.0
     hooks:
     - id: gitlab-ci-linter
       args:
@@ -34,7 +34,7 @@ To specify your own Gitlab server:
 To change a filename:
 ```yaml
 -   repo: https://gitlab.com/devopshq/gitlab-ci-linter
-    rev: 1.0.0
+    rev: v1.0.0
     hooks:
     - id: gitlab-ci-linter
       files: '.gitlab-ci.custom.yml'
