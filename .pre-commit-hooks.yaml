@@ -1,0 +1,10 @@
+---
+# Copy below code to .pre-commit-config.yaml on update
+- id: gitlab-ci-linter
+  name: GitLab CI/CD configuration linter (a pure python version)
+  description: Validates .gitlab-ci.yml file
+  entry: gitlab-ci-linter
+  language: python
+  language_version: python3
+  pass_filenames: false
+  files: .gitlab-ci.yml

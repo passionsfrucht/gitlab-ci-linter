@@ -1,0 +1,4 @@
+.idea
+gitlab_ci_linter.egg-info/
+
+gitlab_ci_linter/__pycache__/
