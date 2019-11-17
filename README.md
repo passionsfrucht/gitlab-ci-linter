@@ -30,6 +30,9 @@ To specify your own Gitlab server:
       args:
         - '--server'
         - 'https://gitlab.example.com'
+# Use --insecure for self-signed certificate if you don't worry about security :)
+# Or if you have a error: [SSL: CERTIFICATE_VERIFY_FAILED]
+#        - '--insecure'
 ```
 To change a filename:
 ```yaml
