@@ -6,6 +6,12 @@ The vetter way to use this - use as pre-commit hooks.
 
 ## Pre-commit hook
 See [pre-commit](https://pre-commit.com) for instructions.
+```bash
+pip install pre-commit
+# Feel .pre-commit-config.yaml as showed below
+pre-commit install
+pre-commit run --all-files
+```
 
 Sample `.pre-commit-config.yaml`:
 ```yaml
