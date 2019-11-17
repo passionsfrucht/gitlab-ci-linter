@@ -50,3 +50,6 @@ We have no package on `pypi` yet. Use git instead:
 pip install git+https://gitlab.com/devopshq/gitlab-ci-linter#master
 gitlab-ci-linter
 ```
+
+-----
+Inspired by https://gitlab.com/smop/pre-commit-hooks
