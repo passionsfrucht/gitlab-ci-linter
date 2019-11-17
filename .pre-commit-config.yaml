@@ -6,8 +6,8 @@
     hooks:
     # Below code is a copy from pre-commit-hooks.yaml
     - id: gitlab-ci-linter
-      name: GitLab CI/CD configuration linter (a pure python version)
-      description: Validates .gitlab-ci.yml file
+      name: .gitlab-ci.yml linter
+      description: Validates .gitlab-ci.yml file (pure-python version)
       entry: gitlab-ci-linter
       language: python
       language_version: python3
