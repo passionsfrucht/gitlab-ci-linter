@@ -1,3 +1,7 @@
+-   repo: https://github.com/Lucas-C/pre-commit-hooks-nodejs
+    rev: master
+    hooks:
+    -   id: markdown-toc
 -   repo: https://github.com/pre-commit/pre-commit
     rev: master
     hooks:
@@ -13,3 +17,4 @@
       language_version: python3
       pass_filenames: false
       files: .gitlab-ci.yml
+

@@ -7,10 +7,23 @@ import urllib.request
 
 
 def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--server', default='https://gitlab.com')
-    parser.add_argument('--filename', default='.gitlab-ci.yml')
-    parser.add_argument('-k', '--insecure', action='store_true')
+    parser = argparse.ArgumentParser(
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter
+    )
+    parser.add_argument(
+        '--server',
+        default='https://gitlab.com',
+        help='This server will check .gitlab-ci.yml',
+    )
+    parser.add_argument(
+        '--filename', default='.gitlab-ci.yml', help='Specify Gitlab CI filename'
+    )
+    parser.add_argument(
+        '-k',
+        '--insecure',
+        action='store_true',
+        help='Allow insecure server connections when using SSL',
+    )
     return parser.parse_args()
 
 
@@ -25,7 +38,6 @@ def gitlab_ci_linter(server, filename, insecure):
     except FileNotFoundError:
         print(f'File not found: {filename}', file=sys.stderr)
         return 1
-
 
     url = f'{server}/api/v4/ci/lint'
     content = {'content': gitlab_ci_content}

@@ -1,8 +1,33 @@
-# check-gitlab-ci
+
+
+<!-- toc -->
+
+- [gitlab-ci-linter](#gitlab-ci-linter)
+  * [Install](#install)
+  * [Pre-commit hook](#pre-commit-hook)
+
+<!-- tocstop -->
+
+# gitlab-ci-linter
 
 `.gitlab-ci.yml` lint script and pre-commit.com hook.
 
-The vetter way to use this - use as pre-commit hooks.
+The better way to use it - use as pre-commit hooks.
+## Install
+We have no package on `pypi` yet. Use git instead:
+
+```bash
+cd yourproject
+
+pip install git+https://gitlab.com/devopshq/gitlab-ci-linter#master
+gitlab-ci-linter --help
+
+# 
+gitlab-ci-linter
+
+# Check with your on-premise instanse
+gitlab-ci-linter --server https://gitlab.example.com #--insecure
+```
 
 ## Pre-commit hook
 See [pre-commit](https://pre-commit.com) for instructions.
@@ -46,13 +71,6 @@ To change a filename:
         - '.gitlab-ci.custom.yml'
 ```
 
-## Installation
-We have no package on `pypi` yet. Use git instead:
-
-```bash
-pip install git+https://gitlab.com/devopshq/gitlab-ci-linter#master
-gitlab-ci-linter
-```
 
 -----
 Inspired by https://gitlab.com/smop/pre-commit-hooks
