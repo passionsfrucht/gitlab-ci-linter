@@ -22,11 +22,11 @@ cd yourproject
 pip install git+https://gitlab.com/devopshq/gitlab-ci-linter#master
 gitlab-ci-linter --help
 
-# 
+#
 gitlab-ci-linter
 
 # Check with your on-premise instanse
-gitlab-ci-linter --server https://gitlab.example.com #--insecure
+gitlab-ci-linter --server https://gitlab.example.com #--insecure --private-token <GITLAB_PRIVATE_TOKEN>
 ```
 
 ## Pre-commit hook
@@ -58,6 +58,8 @@ To specify your own Gitlab server:
 # Use --insecure for self-signed certificate if you don't worry about security :)
 # Or if you have a error: [SSL: CERTIFICATE_VERIFY_FAILED]
 #        - '--insecure'
+# Set GITLAB_PRIVATE_TOKEN as environment variable to authenticate on your own
+# Gitlab server
 ```
 To change a filename:
 ```yaml

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import os
 import ssl
 import sys
 import urllib.request
@@ -8,31 +9,35 @@ import urllib.request
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        formatter_class=argparse.ArgumentDefaultsHelpFormatter
-    )
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument(
         '--server',
         default='https://gitlab.com',
         help='This server will check .gitlab-ci.yml',
     )
-    parser.add_argument(
-        '--filename', default='.gitlab-ci.yml', help='Specify Gitlab CI filename'
-    )
+    parser.add_argument('--filename',
+                        default='.gitlab-ci.yml',
+                        help='Specify Gitlab CI filename')
     parser.add_argument(
         '-k',
         '--insecure',
         action='store_true',
         help='Allow insecure server connections when using SSL',
     )
+    parser.add_argument(
+        '--private-token',
+        help='Use this private token to authenticate on the server',
+        default=os.environ.get('GITLAB_PRIVATE_TOKEN'))
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
-    return gitlab_ci_linter(args.server, args.filename, args.insecure)
+    return gitlab_ci_linter(args.server, args.filename, args.insecure,
+                            args.private_token)
 
 
-def gitlab_ci_linter(server, filename, insecure):
+def gitlab_ci_linter(server, filename, insecure, private_token):
     try:
         gitlab_ci_content = open(filename).read()
     except FileNotFoundError:
@@ -42,15 +47,20 @@ def gitlab_ci_linter(server, filename, insecure):
     url = f'{server}/api/v4/ci/lint'
     content = {'content': gitlab_ci_content}
     data = json.dumps(content).encode('utf-8')
-    r = urllib.request.Request(
-        url, headers={'Content-Type': 'application/json'}, data=data
-    )
+
+    r = urllib.request.Request(url, data=data)
+
+    r.add_header('Content-Type', 'application/json')
+
+    if private_token:
+        r.add_header('PRIVATE-TOKEN', private_token)
 
     # Verify or not server certificate
     ssl_ctx = ssl.SSLContext() if insecure else None
     with urllib.request.urlopen(r, context=ssl_ctx) as gitlab:
         if gitlab.status not in range(200, 300):
-            print(f'Server said {gitlab.status}: {gitlab.url}', file=sys.stderr)
+            print(f'Server said {gitlab.status}: {gitlab.url}',
+                  file=sys.stderr)
             return 1
 
         response_raw = gitlab.read()
