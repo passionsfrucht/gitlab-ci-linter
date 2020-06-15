@@ -1,3 +1,5 @@
+<!-- Empty lines are removed in gitlab ide, but TOC-generator requires them -->
+
 <!-- toc -->
 
 - [gitlab-ci-linter](#gitlab-ci-linter)
