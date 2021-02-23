@@ -4,6 +4,7 @@ import json
 import os
 import ssl
 import sys
+import urllib.parse
 import urllib.request
 
 
@@ -30,24 +31,40 @@ def parse_args():
         help="Use this private token to authenticate on the server",
         default=os.environ.get("GITLAB_PRIVATE_TOKEN"),
     )
+    parser.add_argument(
+        "--project",
+        help="Gitlab project private-token is authorized for",
+        default=os.environ.get("CI_PROJECT_ID"),
+    )
     return parser.parse_args()
 
 
 def main():
     args = parse_args()
     return gitlab_ci_linter(
-        args.server, args.filename, args.insecure, args.private_token
+        args.server, args.filename, args.insecure, args.private_token, args.project
     )
 
 
-def gitlab_ci_linter(server, filename, insecure, private_token):
+def encode(input):
+    input = urllib.parse.quote(input)
+    return input.replace("/", "%2F")
+
+
+def gitlab_ci_linter(server, filename, insecure, private_token, project):
     try:
         gitlab_ci_content = open(filename).read()
     except FileNotFoundError:
         print(f"File not found: {filename}", file=sys.stderr)
         return 1
 
+    if not project:
+        project = ""
+    project = encode(project)
     url = f"{server}/api/v4/ci/lint"
+    if len(project) > 0:
+        url = f"{server}/api/v4/projects/{project}/ci/lint"
+    print(f"using {url} to validate")
     content = {"content": gitlab_ci_content}
     data = json.dumps(content).encode("utf-8")
 
@@ -68,7 +85,7 @@ def gitlab_ci_linter(server, filename, insecure, private_token):
         response_raw = gitlab.read()
         response = json.loads(response_raw.decode("utf-8"))
 
-    if response["status"] == "valid":
+    if response.get("status") == "valid" or response.get("valid"):
         print(f"{filename} is valid")
         return 0
     else:
