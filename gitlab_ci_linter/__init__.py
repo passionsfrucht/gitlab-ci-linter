@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import logging
 import os
 import ssl
 import sys
@@ -34,7 +35,6 @@ def parse_args():
     parser.add_argument(
         "--project",
         help="Gitlab project private-token is authorized for",
-        default=os.environ.get("CI_PROJECT_ID"),
     )
     return parser.parse_args()
 
@@ -58,13 +58,12 @@ def gitlab_ci_linter(server, filename, insecure, private_token, project):
         print(f"File not found: {filename}", file=sys.stderr)
         return 1
 
-    if not project:
-        project = ""
-    project = encode(project)
-    url = f"{server}/api/v4/ci/lint"
-    if len(project) > 0:
+    if project:
+        project = encode(project)
         url = f"{server}/api/v4/projects/{project}/ci/lint"
-    print(f"using {url} to validate")
+    else:
+        url = f"{server}/api/v4/ci/lint"
+    logging.debug(f"using {url} to validate gitlab-ci.y")
     content = {"content": gitlab_ci_content}
     data = json.dumps(content).encode("utf-8")
 
