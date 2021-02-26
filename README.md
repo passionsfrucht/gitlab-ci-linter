@@ -9,8 +9,9 @@
 <!-- tocstop -->
 
 # gitlab-ci-linter
+`gitlab-ci-linter` validates you `.gitlab-ci.yml` file from command-line, before you have commited wrong CI configuration to your repository!
 
-`.gitlab-ci.yml` lint script and pre-commit.com hook.
+Just as https://docs.gitlab.com/ee/ci/lint.html does, but you don't have to open browser every time.
 
 The better way to use it - use as pre-commit hooks.
 
