@@ -74,5 +74,19 @@ To change a filename:
 ```
 
 
+To use a project specific api endpoint:
+```yaml
+-   repo: https://gitlab.com/devopshq/gitlab-ci-linter
+    rev: v1.0.1
+    hooks:
+    - id: gitlab-ci-linter
+      files: '.gitlab-ci.custom.yml'
+      args:
+        - '--server'
+        - 'https://gitlab.example.com'
+        - '--project'
+        - 'user-name/my-project'
+```
+
 -----
 Inspired by https://gitlab.com/smop/pre-commit-hooks
