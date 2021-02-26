@@ -3,8 +3,8 @@
 <!-- toc -->
 
 - [gitlab-ci-linter](#gitlab-ci-linter)
-  * [Install](#install)
   * [Pre-commit hook](#pre-commit-hook)
+  * [Using without pre-commit](#using-without-pre-commit)
 
 <!-- tocstop -->
 
