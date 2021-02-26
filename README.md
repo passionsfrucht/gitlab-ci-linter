@@ -58,7 +58,7 @@ To specify your own Gitlab server:
 # Use --insecure for self-signed certificate if you don't worry about security :)
 # Or if you have a error: [SSL: CERTIFICATE_VERIFY_FAILED]
 #        - '--insecure'
-# Set GITLAB_PRIVATE_TOKEN as environment variable to authenticate on your own
+# Set GITLAB_PRIVATE_TOKEN to a project access token with `api` scope as environment variable to authenticate on your own
 # Gitlab server
 ```
 To change a filename:
