@@ -87,6 +87,3 @@ To use a project specific api endpoint:
         - '--project'
         - 'user-name/my-project'
 ```
-
------
-Inspired by https://gitlab.com/smop/pre-commit-hooks
