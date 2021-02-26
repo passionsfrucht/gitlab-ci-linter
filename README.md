@@ -13,21 +13,6 @@
 `.gitlab-ci.yml` lint script and pre-commit.com hook.
 
 The better way to use it - use as pre-commit hooks.
-## Install
-We have no package on `pypi` yet. Use git instead:
-
-```bash
-cd yourproject
-
-pip install git+https://gitlab.com/devopshq/gitlab-ci-linter#master
-gitlab-ci-linter --help
-
-#
-gitlab-ci-linter
-
-# Check with your on-premise instanse
-gitlab-ci-linter --server https://gitlab.example.com #--insecure --private-token <GITLAB_PRIVATE_TOKEN>
-```
 
 ## Pre-commit hook
 See [pre-commit](https://pre-commit.com) for instructions.
@@ -86,4 +71,20 @@ To use a project specific api endpoint:
         - 'https://gitlab.example.com'
         - '--project'
         - 'user-name/my-project'
+```
+
+## Using without pre-commit
+We have no package on `pypi` yet. Use git instead:
+
+```bash
+cd yourproject
+
+pip install git+https://gitlab.com/devopshq/gitlab-ci-linter#master
+gitlab-ci-linter --help
+
+#
+gitlab-ci-linter
+
+# Check with your on-premise instanse
+gitlab-ci-linter --server https://gitlab.example.com #--insecure --private-token <GITLAB_PRIVATE_TOKEN>
 ```
