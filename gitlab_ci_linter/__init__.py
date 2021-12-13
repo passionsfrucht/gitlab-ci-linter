@@ -29,12 +29,10 @@ def parse_args():
     parser.add_argument(
         "--private-token",
         help="Use this private token to authenticate on the server",
-        default=os.environ.get("GITLAB_PRIVATE_TOKEN"),
     )
     parser.add_argument(
         "--project",
         help="Gitlab project private-token is authorized for",
-        default=os.environ.get("CI_PROJECT_ID"),
     )
     return parser.parse_args()
 
